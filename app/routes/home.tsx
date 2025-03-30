@@ -1,5 +1,12 @@
 import type { Route } from "./+types/home";
 import { Welcome } from "../welcome/welcome";
+import { createTheme, MantineProvider } from '@mantine/core';
+import '@mantine/core/styles.css';
+
+
+const theme = createTheme({
+  /** Put your mantine theme override here */
+});
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -13,5 +20,9 @@ export function loader({ context }: Route.LoaderArgs) {
 }
 
 export default function Home({ loaderData }: Route.ComponentProps) {
-  return <Welcome message={loaderData.message} />;
+  return (
+    <MantineProvider theme={theme}>
+      <Welcome message={loaderData.message} />
+    </MantineProvider>
+  )
 }
